@@ -15,7 +15,7 @@
 </head>
 
 <body>
-  <div class="page-shell">
+  <div class="page-shell" id="accueil">
 
     <header class="masthead">
       <div class="top-ornament" aria-hidden="true">
@@ -33,10 +33,18 @@
       </div>
 
       <p class="date-line" id="date">Chargement du jour…</p>
+
+      <nav class="site-nav" aria-label="Navigation principale">
+        <a href="#accueil">Accueil</a>
+        <a href="#horoscope-section">Horoscope</a>
+        <a href="#lune">Lune</a>
+        <a href="#tarot">Tarot</a>
+      </nav>
+
     </header>
 
     <main>
-      <section class="section-block horoscope-section">
+      <section class="section-block horoscope-section" id="horoscope-section">
         <div class="section-heading">
           <span class="heading-symbol">✧</span>
           <div>
@@ -114,7 +122,7 @@
         </div>
       </section>
 
-      <section class="section-block moon-section">
+      <section class="section-block moon-section" id="lune">
         <div class="section-heading">
           <span class="heading-symbol">✦</span>
           <div>
@@ -143,7 +151,7 @@
         </article>
       </section>
 
-      <section class="section-block tarot-section">
+      <section class="section-block tarot-section" id="tarot">
         <div class="section-heading">
           <span class="heading-symbol">✧</span>
           <div>
