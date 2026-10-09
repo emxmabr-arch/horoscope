@@ -354,11 +354,11 @@ function renderHoroscopeParagraphs(body) {
     });
   } else if (typeof value === "string") {
     // Si le service renvoie du HTML, on le convertit en texte sans l'afficher brut.
-    const normalized = value.replace(/<\\/p>\\s*<p[^>]*>/gi, "\\n\\n");
+    const normalized = value.replace(/<\/p>\s*<p[^>]*>/gi, "\n\n");
     const plainText = normalized.replace(/<[^>]*>/g, " ").replace(/&nbsp;/g, " ").trim();
     paragraphs = plainText
-      .split(/\\n{2,}/)
-      .map(paragraph => paragraph.replace(/\\s+/g, " ").trim())
+      .split(/\n{2,}/)
+      .map(paragraph => paragraph.replace(/\s+/g, " ").trim())
       .filter(Boolean);
     if (paragraphs.length === 0 && plainText) paragraphs = [plainText];
   }
