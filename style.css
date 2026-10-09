@@ -984,3 +984,108 @@ body::before {
   body::before { inset: 7px; }
   .site-nav { gap: 8px 20px; }
 }
+
+
+/* ── Gravures célestes : illustrations originales et détails botaniques ── */
+.celestial-illustration {
+  width: min(100%, 540px);
+  margin: 22px auto 8px;
+  color: var(--gold);
+  opacity: .96;
+}
+.celestial-illustration svg { display: block; width: 100%; height: auto; overflow: visible; }
+.vine-lines { color: var(--gold); }
+.celestial-fish { color: var(--gold); filter: drop-shadow(0 3px 6px rgba(0,0,0,.2)); }
+.illustration-stars { color: var(--pink); }
+.masthead {
+  border-radius: 190px 190px 2px 2px;
+  box-shadow: inset 0 0 0 7px #211d25, inset 0 0 0 8px rgba(216,183,124,.2);
+}
+.masthead::before { content: ""; width: 150px; height: 150px; border: 1px solid rgba(216,183,124,.25); border-radius: 50%; top: 36px; left: calc(50% - 75px); opacity: .8; }
+.masthead::after { content: "✧"; top: 56px; right: 13%; font-size: 24px; opacity: .7; color: var(--pink); }
+.zodiac-seal { position: relative; }
+.zodiac-seal::marker { display: none; }
+.section-heading { position: relative; }
+.section-heading::after {
+  content: "❧";
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--gold);
+  font-size: 17px;
+  line-height: 1;
+}
+.ornate-panel { border-radius: 2px 42px 2px 42px; position: relative; }
+.ornate-panel::before {
+  content: "✧";
+  position: absolute;
+  right: 21px;
+  top: 16px;
+  color: var(--turquoise);
+  font-size: 18px;
+  opacity: .75;
+}
+.life-card { transition: transform .25s ease, border-color .25s ease; }
+.life-card:hover { transform: translateY(-5px); border-color: var(--gold); }
+.life-card::after {
+  content: "❧";
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(90deg);
+  color: var(--gold);
+  font-size: 18px;
+  opacity: .72;
+}
+.moon-panel { border-radius: 2px 42px 2px 42px; }
+.moon-orbit { position: relative; }
+.moon-orbit::after {
+  content: "✧";
+  position: absolute;
+  right: -9px;
+  top: 29px;
+  color: var(--pink);
+  font-size: 23px;
+}
+.tarot-card { border-radius: 120px 120px 4px 4px; position: relative; }
+.tarot-art { isolation: isolate; }
+.tarot-botanical {
+  position: absolute;
+  z-index: 2;
+  inset: 2% 0 0;
+  width: 100%;
+  height: 98%;
+  opacity: .95;
+  pointer-events: none;
+}
+.tarot-sun { z-index: 0; }
+.tarot-moon { z-index: 3; }
+.tarot-water { z-index: 1; }
+.tarot-butterfly, .tarot-star { z-index: 4; }
+.tarot-reading {
+  padding: 26px 28px;
+  border: 1px solid rgba(216,183,124,.5);
+  background: #28232e;
+  position: relative;
+}
+.tarot-reading::before, .tarot-reading::after {
+  content: "❧";
+  position: absolute;
+  color: var(--gold);
+  font-size: 22px;
+  opacity: .75;
+}
+.tarot-reading::before { top: 7px; left: 10px; }
+.tarot-reading::after { bottom: 7px; right: 10px; transform: rotate(180deg); }
+.closing-note { padding: 20px 10px; }
+.footer { border-top: 1px solid rgba(216,183,124,.35); padding-top: 25px; }
+@media (max-width: 680px) {
+  .masthead { border-radius: 120px 120px 2px 2px; }
+  .masthead::before { left: calc(50% - 75px); }
+  .celestial-illustration { margin-top: 14px; }
+  .tarot-reading { padding: 23px 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .life-card:hover { transform: none; }
+}
