@@ -310,7 +310,7 @@ function renderApiCredit(url) {
   if (!container) return;
 
   const link = document.createElement("a");
-  link.href = "https://sigastra.com/";
+  link.href = url || "https://sigastra.com/";
   link.target = "_blank";
   link.rel = "noopener noreferrer";
   link.textContent = "Horoscope fourni par Sigastra";
