@@ -324,33 +324,53 @@ function renderApiCredit(url) {
 
 function renderHoroscopeParagraphs(body) {
   const container = document.getElementById("horoscope");
-  if (!container) return;
+  if (!container) return false;
 
   container.replaceChildren();
 
-  let paragraphs = [];
+  // Selon le format renvoyé, le texte peut être une chaîne, un tableau
+  // de paragraphes ou un objet contenant le texte dans un champ connu.
+  let value = body;
+  if (value && typeof value === "object" && !Array.isArray(value)) {
+    value =
+      value.text ??
+      value.body ??
+      value.html ??
+      value.content ??
+      value.articleBody ??
+      value.overview ??
+      value.general ??
+      value.main;
+  }
 
-  if (Array.isArray(body)) {
-    paragraphs = body;
-  } else if (typeof body === "string") {
-    paragraphs = body
-      .split(/\n{2,}/)
-      .map(paragraph => paragraph.trim())
+  let paragraphs = [];
+  if (Array.isArray(value)) {
+    paragraphs = value.map(part => {
+      if (typeof part === "string") return part;
+      if (part && typeof part === "object") {
+        return part.text ?? part.body ?? part.content ?? "";
+      }
+      return "";
+    });
+  } else if (typeof value === "string") {
+    // Si le service renvoie du HTML, on le convertit en texte sans l'afficher brut.
+    const normalized = value.replace(/<\\/p>\\s*<p[^>]*>/gi, "\\n\\n");
+    const plainText = normalized.replace(/<[^>]*>/g, " ").replace(/&nbsp;/g, " ").trim();
+    paragraphs = plainText
+      .split(/\\n{2,}/)
+      .map(paragraph => paragraph.replace(/\\s+/g, " ").trim())
       .filter(Boolean);
+    if (paragraphs.length === 0 && plainText) paragraphs = [plainText];
   }
 
   paragraphs.forEach(paragraph => {
-    if (typeof paragraph !== "string") return;
-
+    if (typeof paragraph !== "string" || !paragraph.trim()) return;
     const element = document.createElement("p");
-    element.textContent = paragraph;
+    element.textContent = paragraph.trim();
     container.appendChild(element);
   });
 
-  if (container.children.length === 0) {
-    container.textContent =
-      "Le ciel garde encore ses secrets. Réessaie un peu plus tard.";
-  }
+  return container.children.length > 0;
 }
 
 async function loadHoroscope() {
@@ -385,12 +405,21 @@ async function loadHoroscope() {
       item.text ??
       item.body ??
       item.articleBody ??
+      item.content ??
+      item.description ??
       editorial.body ??
       item.sections?.overview ??
       item.sections?.general ??
-      item.sections?.main;
+      item.sections?.main ??
+      item.sections ??
+      result.text ??
+      result.body;
 
-    renderHoroscopeParagraphs(horoscopeBody);
+    const rendered = renderHoroscopeParagraphs(horoscopeBody);
+    if (!rendered) {
+      console.warn("Réponse Sigastra sans texte reconnu :", result);
+      throw new Error("Le texte de l'horoscope est absent ou dans un format inattendu.");
+    }
 
     setText(
       "horoscope-love",
