@@ -1,0 +1,222 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Le Grimoire Astral</title>
+  <meta name="theme-color" content="#171329">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="page-shell">
+
+    <header class="masthead">
+      <div class="top-ornament" aria-hidden="true">
+        <span>✳</span><span>☾</span><span>✳</span>
+      </div>
+
+      <p class="eyebrow">ASTROLOGIE · LUNE · TAROT</p>
+      <h1>Le Grimoire <em>Astral</em></h1>
+      <p class="subtitle">Un petit refuge entre les étoiles et les songes.</p>
+
+      <div class="zodiac-seal" aria-label="Signe astrologique des Poissons">
+        <span class="seal-star">✧</span>
+        <span class="pisces-symbol">♓</span>
+        <span class="seal-caption">LES POISSONS</span>
+      </div>
+
+      <p class="date-line" id="date">Chargement du jour…</p>
+    </header>
+
+    <main>
+      <section class="section-block horoscope-section">
+        <div class="section-heading">
+          <span class="heading-symbol">✧</span>
+          <div>
+            <p class="eyebrow">LES MESSAGES DU COSMOS</p>
+            <h2>Ton ciel du jour</h2>
+          </div>
+          <span class="heading-symbol">✧</span>
+        </div>
+
+        <article class="ornate-panel horoscope-panel">
+          <div class="panel-corner corner-tl">❧</div>
+          <div class="panel-corner corner-tr">❧</div>
+
+          <div class="panel-topline">
+            <span class="tiny-star">✦</span>
+            <span>POISSONS</span>
+            <span class="tiny-star">✦</span>
+          </div>
+
+          <div id="horoscope-status" class="status-line">
+            Les astres murmurent…
+          </div>
+
+          <div id="horoscope" class="horoscope-text">
+            Ton horoscope apparaîtra ici.
+          </div>
+
+          <div class="panel-bottom-ornament" aria-hidden="true">
+            ─── ❧ ✧ ❧ ───
+          </div>
+
+          <div class="panel-corner corner-bl">❧</div>
+          <div class="panel-corner corner-br">❧</div>
+        </article>
+
+        <p class="source-line">
+          Les astres proposent, tu restes libre de ton chemin.
+        </p>
+      </section>
+
+      <section class="section-block">
+        <div class="section-heading">
+          <span class="heading-symbol">☽</span>
+          <div>
+            <p class="eyebrow">TROIS FACETTES DE TA JOURNÉE</p>
+            <h2>Les courants intérieurs</h2>
+          </div>
+          <span class="heading-symbol">☾</span>
+        </div>
+
+        <div class="life-grid">
+          <article class="life-card love-card">
+            <div class="card-motif" aria-hidden="true">♡</div>
+            <p class="card-label">I · LE CŒUR</p>
+            <h3>Amour</h3>
+            <p id="horoscope-love">Les messages du cœur arrivent ici.</p>
+            <span class="card-star" aria-hidden="true">✧</span>
+          </article>
+
+          <article class="life-card work-card">
+            <div class="card-motif" aria-hidden="true">☼</div>
+            <p class="card-label">II · L'ÉLAN</p>
+            <h3>Création & projets</h3>
+            <p id="horoscope-work">Les énergies créatives arrivent ici.</p>
+            <span class="card-star" aria-hidden="true">✧</span>
+          </article>
+
+          <article class="life-card energy-card">
+            <div class="card-motif" aria-hidden="true">☾</div>
+            <p class="card-label">III · L'INTÉRIEUR</p>
+            <h3>Énergie</h3>
+            <p id="horoscope-energy">Les tendances du jour arrivent ici.</p>
+            <span class="card-star" aria-hidden="true">✧</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block moon-section">
+        <div class="section-heading">
+          <span class="heading-symbol">✦</span>
+          <div>
+            <p class="eyebrow">LE RYTHME CÉLESTE</p>
+            <h2>Jardin de Lune</h2>
+          </div>
+          <span class="heading-symbol">✦</span>
+        </div>
+
+        <article class="moon-panel">
+          <div class="moon-orbit" aria-hidden="true">
+            <span class="orbit-dot dot-one">✧</span>
+            <span class="orbit-dot dot-two">✦</span>
+            <span class="orbit-dot dot-three">·</span>
+            <div id="moon-emoji" class="moon-emoji">☾</div>
+          </div>
+
+          <div class="moon-copy">
+            <p class="eyebrow">AUJOURD'HUI, LA LUNE EST</p>
+            <h3 id="moon-name">Lune mystérieuse</h3>
+            <p id="moon-description">
+              Un instant pour ralentir et écouter le mouvement du ciel.
+            </p>
+            <div class="moon-divider">❧ ───── ✧ ───── ❧</div>
+          </div>
+        </article>
+      </section>
+
+      <section class="section-block tarot-section">
+        <div class="section-heading">
+          <span class="heading-symbol">✧</span>
+          <div>
+            <p class="eyebrow">UNE CARTE, UN MIROIR</p>
+            <h2>Le tarot du jour</h2>
+          </div>
+          <span class="heading-symbol">✧</span>
+        </div>
+
+        <p class="section-intro">
+          Une image symbolique pour accompagner ta réflexion.
+        </p>
+
+        <div class="tarot-layout">
+          <div class="tarot-card-wrap">
+            <article class="tarot-card" aria-label="Carte de tarot du jour">
+              <div class="tarot-inner-frame">
+                <p class="tarot-number" id="tarot-number">XVII</p>
+
+                <div class="tarot-art" aria-hidden="true">
+                  <div class="tarot-sun"></div>
+                  <div class="tarot-moon">☾</div>
+                  <div class="tarot-butterfly butterfly-one">❧</div>
+                  <div class="tarot-butterfly butterfly-two">✧</div>
+                  <div class="tarot-water"></div>
+                  <div class="tarot-star star-a">✦</div>
+                  <div class="tarot-star star-b">✧</div>
+                  <div class="tarot-star star-c">·</div>
+                </div>
+
+                <h3 id="tarot-name">L'Étoile</h3>
+                <p class="tarot-caption">ARCANE DU JOUR</p>
+              </div>
+            </article>
+          </div>
+
+          <div class="tarot-reading">
+            <p class="eyebrow">TON TIRAGE SYMBOLIQUE</p>
+            <h3 id="tarot-reading-title">Une invitation à rêver</h3>
+
+            <p class="tarot-keywords" id="tarot-keywords">
+              Espoir · Intuition · Renouveau
+            </p>
+
+            <div class="reading-divider">✧ ─── ❧ ─── ✧</div>
+
+            <p id="tarot-message">
+              Laisse une place à ce qui cherche doucement à éclore.
+            </p>
+
+            <p class="tarot-disclaimer">
+              Le tarot est ici un support créatif et introspectif,
+              non une prédiction certaine.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="closing-note">
+        <span class="closing-star">✧</span>
+        <p>Tout l'univers tient parfois dans un petit instant de calme.</p>
+        <span class="closing-star">✧</span>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-ornament">☽ · ✦ · ☾</div>
+      <p>Fait de songes, de symboles et de poussière d'étoiles.</p>
+      <p class="footer-small">LE GRIMOIRE ASTRAL · ÉDITION PERSONNELLE</p>
+      <p class="api-credit" id="api-credit"></p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
