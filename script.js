@@ -368,34 +368,46 @@ async function loadHoroscope() {
     }
 
     const result = await response.json();
-
     const item = result.items?.[0] ?? result;
+    const attribution = result.attribution ?? {};
     const editorial = item.editorial ?? {};
     const data = item.data ?? {};
 
     if (status) {
       status.textContent =
-        editorial.title || "Les murmures du jour";
+        item.title || item.headline || editorial.title || "Les murmures du jour";
     }
 
-    renderHoroscopeParagraphs(editorial.body);
+    // L'API Sigastra expose désormais le texte directement dans item.text.
+    // On conserve les anciens champs en secours pour éviter de casser l'affichage
+    // si la structure de la réponse évolue à nouveau.
+    const horoscopeBody =
+      item.text ??
+      item.body ??
+      item.articleBody ??
+      editorial.body ??
+      item.sections?.overview ??
+      item.sections?.general ??
+      item.sections?.main;
+
+    renderHoroscopeParagraphs(horoscopeBody);
 
     setText(
       "horoscope-love",
-      data.loveLine || "Écoute ce que tes liens font naître en toi."
+      data.loveLine || item.loveLine || "Écoute ce que tes liens font naître en toi."
     );
 
     setText(
       "horoscope-work",
-      data.workLine || "Laisse une place à tes idées et à ta curiosité."
+      data.workLine || item.workLine || "Laisse une place à tes idées et à ta curiosité."
     );
 
     setText(
       "horoscope-energy",
-      data.energyLine || "Accorde-toi le rythme dont tu as besoin."
+      data.energyLine || item.energyLine || "Accorde-toi le rythme dont tu as besoin."
     );
 
-    renderApiCredit(editorial.canonical || item.url);
+    renderApiCredit(attribution.localizedHref || editorial.canonical || item.url);
   } catch (error) {
     console.error("Impossible de charger l'horoscope :", error);
 
