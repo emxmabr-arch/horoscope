@@ -2020,3 +2020,20 @@ body .closing-note,
 .panel-bottom-ornament {
   font-size: 0 !important;
 }
+
+
+/* Nouveau dos illustré des arcanes, depuis l'illustration ajoutée aux assets. */
+.tarot-back-frame {
+  background: url("assets/illustrations/carte face caché.png.jpeg") center / cover no-repeat !important;
+  border: 0 !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  color: transparent !important;
+}
+.tarot-back-frame::before {
+  content: none !important;
+  display: none !important;
+}
+.tarot-back-frame > span {
+  display: none !important;
+}
