@@ -1847,3 +1847,33 @@ h1 em, h2 em, h3 em, h4 em,
 .tarot-card h3 em {
   font-style: normal !important;
 }
+
+
+/* Derniers textes : Voltaire de façon explicite, y compris les éléments générés */
+.site-nav,
+.site-nav a,
+.section-intro,
+.tarot-reading h4,
+.tarot-caption,
+.tarot-status,
+#tarot-status,
+#tarot-hint,
+.closing-note,
+.closing-note p,
+.footer,
+.footer p,
+.footer-small,
+.api-credit,
+.zodiac-seal .seal-caption::after {
+  font-family: 'Voltaire', sans-serif !important;
+  font-style: normal !important;
+}
+
+/* Libellés du tarot et navigation : garder la même typographie partout */
+.tarot-caption {
+  letter-spacing: 2px;
+}
+.zodiac-seal .seal-caption::after {
+  font-weight: 400 !important;
+  letter-spacing: 3px;
+}
