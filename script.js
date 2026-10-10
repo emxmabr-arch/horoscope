@@ -700,12 +700,12 @@ function showSavedDailyTarot(card) {
   setText("tarot-reading-title", card.title);
   setText("tarot-message", card.message);
   setText("tarot-personal", getPersonalTarotReflection(card));
-  setText("tarot-question", tarotQuestions[card.name] || "Qu'est-ce que cette carte vient éveiller en toi aujourd'hui ?");
+  setText("tarot-question", tarotQuestions[card.name] || "Qu'est-ce que cette carte vient éveiller en moi aujourd'hui ?");
 
   const result = document.getElementById("tarot-result");
   if (result) result.hidden = false;
-  setText("tarot-status", `Ton arcane du jour : ${card.name}.`);
-  setText("tarot-hint", "Ton tirage du jour est conservé. Reviens demain pour découvrir un nouvel arcane.");
+  setText("tarot-status", `Mon arcane du jour : ${card.name}.`);
+  setText("tarot-hint", "Mon tirage du jour est conservé. Je reviendrai demain pour découvrir un nouvel arcane.");
   renderTarotDeck();
 }
 
@@ -720,10 +720,10 @@ function shuffleTarotDeck() {
   const deck = document.getElementById("tarot-deck");
   if (deck) deck.classList.add("deck-shuffling");
   setText("tarot-status", "Les arcanes se mêlent et changent de place…");
-  setText("tarot-hint", "Prends ton temps, puis choisis la carte qui t'attire.");
+  setText("tarot-hint", "Je prends mon temps, puis je choisis la carte qui m'attire.");
   window.setTimeout(() => {
     renderTarotDeck();
-    setText("tarot-status", "Les 22 arcanes attendent ton choix…");
+    setText("tarot-status", "Mes 22 arcanes attendent mon choix…");
   }, 450);
 }
 
@@ -743,7 +743,7 @@ function revealTarotCard(index) {
   setText("tarot-reading-title", card.title);
   setText("tarot-message", card.message);
   setText("tarot-personal", getPersonalTarotReflection(card));
-  setText("tarot-question", tarotQuestions[card.name] || "Qu'est-ce que cette carte vient éveiller en toi aujourd'hui ?");
+  setText("tarot-question", tarotQuestions[card.name] || "Qu'est-ce que cette carte vient éveiller en moi aujourd'hui ?");
 
   const result = document.getElementById("tarot-result");
   if (result) {
@@ -752,8 +752,8 @@ function revealTarotCard(index) {
     void result.offsetWidth;
     result.classList.add("tarot-result-reveal");
   }
-  setText("tarot-status", `Ton arcane est révélé : ${card.name}.`);
-  setText("tarot-hint", "Lis le message à ton rythme, puis garde ce qui résonne en toi.");
+  setText("tarot-status", `Mon arcane est révélé : ${card.name}.`);
+  setText("tarot-hint", "Je lis le message à mon rythme et je garde ce qui résonne en moi.");
   renderTarotDeck();
   if (result) result.scrollIntoView({ behavior: "smooth", block: "start" });
 }
