@@ -1877,3 +1877,14 @@ h1 em, h2 em, h3 em, h4 em,
   font-weight: 400 !important;
   letter-spacing: 3px;
 }
+
+
+/* Corrections ciblées : intertitre du tarot en Voltaire et lune sans étoiles */
+#tarot-result .tarot-reading h4 {
+  font-family: 'Voltaire', sans-serif !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+}
+.moon-orbit .orbit-dot {
+  display: none !important;
+}
