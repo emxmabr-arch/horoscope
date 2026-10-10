@@ -1813,3 +1813,37 @@ body .closing-note {
   font-style: normal !important;
   color: #fff !important;
 }
+
+
+/* Typographie Art déco pour les titres */
+@font-face {
+  font-family: 'CS Amber';
+  src: url('assets/CsAmberDemoRegular-JpOeM.otf') format('opentype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+h1, h2, h3, h4,
+.section-heading,
+.heading-title,
+.masthead .eyebrow,
+.life-card h3,
+.moon-copy h3,
+.tarot-reading h3,
+.tarot-reading h4,
+.tarot-card h3 {
+  font-family: 'CS Amber', serif !important;
+  font-style: normal !important;
+  font-weight: 400;
+}
+
+h1 em, h2 em, h3 em, h4 em,
+.section-heading em,
+.life-card h3 em,
+.moon-copy h3 em,
+.tarot-reading h3 em,
+.tarot-reading h4 em,
+.tarot-card h3 em {
+  font-style: normal !important;
+}
