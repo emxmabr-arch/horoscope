@@ -611,9 +611,68 @@ function renderTarotDeck() {
 
 let selectedTarotIndex = -1;
 
-function shuffleTarotDeck() {
+const DAILY_TAROT_STORAGE_KEY = "grimoire-astral-daily-tarot-v1";
+
+function getLocalDateKey(date = new Date()) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function readSavedDailyTarot() {
+  try {
+    const raw = window.localStorage.getItem(DAILY_TAROT_STORAGE_KEY);
+    if (!raw) return null;
+    const saved = JSON.parse(raw);
+    if (saved.date !== getLocalDateKey()) {
+      window.localStorage.removeItem(DAILY_TAROT_STORAGE_KEY);
+      return null;
+    }
+    return tarotCards.find(card => card.name === saved.cardName) || null;
+  } catch (error) {
+    console.warn("Le tirage quotidien ne peut pas être lu :", error);
+    return null;
+  }
+}
+
+function saveDailyTarot(card) {
+  try {
+    window.localStorage.setItem(
+      DAILY_TAROT_STORAGE_KEY,
+      JSON.stringify({ date: getLocalDateKey(), cardName: card.name })
+    );
+  } catch (error) {
+    console.warn("Le tirage quotidien ne peut pas être conservé :", error);
+  }
+}
+
+function showSavedDailyTarot(card) {
   shuffledTarot = shuffleArray(tarotCards);
-  tarotHasBeenDrawn = false;
+  selectedTarotIndex = shuffledTarot.findIndex(item => item.name === card.name);
+  tarotHasBeenDrawn = true;
+
+  setText("tarot-number", card.number);
+  setText("tarot-name", card.name);
+  setTarotIllustration(card);
+  setText("tarot-keywords", card.keywords);
+  setText("tarot-reading-title", card.title);
+  setText("tarot-message", card.message);
+  setText("tarot-personal", getPersonalTarotReflection(card));
+  setText("tarot-question", tarotQuestions[card.name] || "Qu'est-ce que cette carte vient éveiller en toi aujourd'hui ?");
+
+  const result = document.getElementById("tarot-result");
+  if (result) result.hidden = false;
+  setText("tarot-status", `Ton arcane du jour : ${card.name}.`);
+  setText("tarot-hint", "Ton tirage du jour est conservé. Reviens demain pour découvrir un nouvel arcane.");
+  renderTarotDeck();
+}
+
+function shuffleTarotDeck() {
+  // Une carte révélée est le tirage du jour : on ne la remplace pas en rechargeant.
+  if (tarotHasBeenDrawn) return;
+
+  shuffledTarot = shuffleArray(tarotCards);
   selectedTarotIndex = -1;
   const result = document.getElementById("tarot-result");
   if (result) result.hidden = true;
@@ -633,6 +692,7 @@ function revealTarotCard(index) {
   if (!card) return;
   tarotHasBeenDrawn = true;
   selectedTarotIndex = index;
+  saveDailyTarot(card);
 
   setText("tarot-number", card.number);
   setText("tarot-name", card.name);
@@ -661,7 +721,13 @@ function initInteractiveTarot() {
   const newButton = document.getElementById("new-tarot");
   if (shuffleButton) shuffleButton.addEventListener("click", shuffleTarotDeck);
   if (newButton) newButton.addEventListener("click", shuffleTarotDeck);
-  shuffleTarotDeck();
+
+  const savedCard = readSavedDailyTarot();
+  if (savedCard) {
+    showSavedDailyTarot(savedCard);
+  } else {
+    shuffleTarotDeck();
+  }
 }
 
 function initGrimoire() {
