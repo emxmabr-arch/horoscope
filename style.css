@@ -1723,3 +1723,10 @@ h1, h2, h3, h4,
 .masthead .eyebrow {
   text-transform: uppercase;
 }
+
+
+/* Le titre principal est entièrement blanc, y compris « Pisces » */
+.masthead h1,
+.masthead h1 em {
+  color: #fff !important;
+}
