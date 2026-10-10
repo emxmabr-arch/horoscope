@@ -2075,3 +2075,23 @@ body .closing-note,
 .horoscope-refresh-wrap {
   margin-top: 18px;
 }
+
+
+/* Bouton d'actualisation plus discret et centré sous l'horoscope. */
+.horoscope-refresh-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+.horoscope-refresh-wrap .tarot-action-button {
+  min-height: 32px;
+  padding: 6px 13px;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 500;
+  border-width: 1px;
+  opacity: 0.86;
+}
+.horoscope-refresh-wrap .tarot-action-button:hover {
+  opacity: 1;
+}
