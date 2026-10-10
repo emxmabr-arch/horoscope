@@ -1337,3 +1337,22 @@ body::before {
   overflow: hidden;
 }
 .tarot-art-image { display: block; }
+
+
+/* Une seule bordure dorée pour la carte révélée */
+.tarot-card.revealed {
+  border: 1px solid var(--gold) !important;
+  box-shadow: 0 12px 0 #17151b !important;
+}
+.tarot-card.revealed .tarot-inner-frame {
+  border: 0 !important;
+  padding: 13px !important;
+}
+.tarot-card.revealed .tarot-art-image {
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.tarot-card.revealed:hover {
+  box-shadow: 0 12px 0 #17151b !important;
+  transform: none;
+}
