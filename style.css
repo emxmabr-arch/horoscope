@@ -1714,3 +1714,12 @@ body::before { opacity: .08; }
 .moon-emoji { display: block; width: 58px; height: 58px; margin: auto; }
 .tarot-moon, .tarot-back-moon { display: block; width: 25px; height: 25px; }
 .tarot-star, .tarot-back-star { display: block; width: 16px; height: 16px; }
+
+
+/* Titres en capitales pour une identité éditoriale cohérente */
+h1, h2, h3, h4,
+.section-heading,
+.heading-title,
+.masthead .eyebrow {
+  text-transform: uppercase;
+}
