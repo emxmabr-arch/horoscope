@@ -1979,3 +1979,15 @@ body .closing-note,
   font-style: normal !important;
   font-weight: 400 !important;
 }
+
+
+/* Courants vivants : conserver un seul cadre autour de chaque carte. */
+.life-card::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* Un peu plus d'air entre le cadre de l'horoscope et le titre suivant. */
+.horoscope-section + .section-block {
+  margin-top: 34px !important;
+}
