@@ -1924,3 +1924,10 @@ h1 em, h2 em, h3 em, h4 em,
   opacity: 0 !important;
   visibility: hidden !important;
 }
+
+
+/* Le petit éclat à droite était dessiné par ce pseudo-élément, pas par les étoiles HTML. */
+.moon-orbit::after {
+  content: none !important;
+  display: none !important;
+}
