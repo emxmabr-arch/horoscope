@@ -622,11 +622,15 @@ function createTarotBack(index) {
   return button;
 }
 
+let tarotDeckExpanded = false;
+
 function renderTarotDeck() {
   const deck = document.getElementById("tarot-deck");
   if (!deck) return;
   deck.replaceChildren();
+  const visibleCards = tarotDeckExpanded ? shuffledTarot.length : Math.min(1, shuffledTarot.length);
   shuffledTarot.forEach((card, index) => {
+    if (index >= visibleCards) return;
     if (tarotHasBeenDrawn && index === selectedTarotIndex) return;
     deck.appendChild(createTarotBack(index));
   });
@@ -715,6 +719,7 @@ function shuffleTarotDeck() {
 
   shuffledTarot = shuffleArray(tarotCards);
   selectedTarotIndex = -1;
+  tarotDeckExpanded = true;
   const result = document.getElementById("tarot-result");
   if (result) result.hidden = true;
   const deck = document.getElementById("tarot-deck");
@@ -767,9 +772,15 @@ function initInteractiveTarot() {
 
   const savedCard = readSavedDailyTarot();
   if (savedCard) {
+    tarotDeckExpanded = true;
     showSavedDailyTarot(savedCard);
   } else {
-    shuffleTarotDeck();
+    shuffledTarot = shuffleArray(tarotCards);
+    selectedTarotIndex = -1;
+    tarotDeckExpanded = false;
+    renderTarotDeck();
+    setText("tarot-status", "Une carte attend que je la découvre…");
+    setText("tarot-hint", "Je mélange les cartes pour révéler les 22 arcanes.");
   }
 }
 
