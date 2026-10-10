@@ -1888,3 +1888,23 @@ h1 em, h2 em, h3 em, h4 em,
 .moon-orbit .orbit-dot {
   display: none !important;
 }
+
+
+/* Correctif prioritaire : l'intertitre de lecture doit vraiment être en Voltaire */
+#tarot-result h4,
+#tarot-result .tarot-reading h4,
+.tarot-result .tarot-reading h4 {
+  font-family: 'Voltaire', sans-serif !important;
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  text-transform: none !important;
+}
+/* Le poisson reste seul dans l'orbite lunaire */
+.moon-orbit .orbit-dot,
+.moon-orbit .dot-one,
+.moon-orbit .dot-two,
+.moon-orbit .dot-three {
+  display: none !important;
+  visibility: hidden !important;
+}
