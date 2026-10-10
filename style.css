@@ -1375,3 +1375,72 @@ body::before {
   outline: none !important;
   box-shadow: none !important;
 }
+
+
+/* Illustrations originales du Grimoire */
+body {
+  background-color: var(--night);
+  background-image:
+    linear-gradient(rgba(18, 13, 30, .76), rgba(18, 13, 30, .88)),
+    url("assets/illustrations/fond-violet.png.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+body::before { opacity: .08; }
+.masthead {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-top: 230px;
+}
+.masthead::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0 0 auto;
+  height: 270px;
+  background-image:
+    linear-gradient(to bottom, rgba(23,19,41,.12) 0%, rgba(23,19,41,.2) 55%, var(--night) 100%),
+    url("assets/illustrations/bandeau-lanterne.png.PNG");
+  background-size: cover;
+  background-position: center 43%;
+  background-repeat: no-repeat;
+  opacity: .96;
+}
+.top-ornament { display: none; }
+.personal-illustrations {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  min-height: 108px;
+  margin: 14px auto 8px;
+}
+.personal-illustrations img {
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(200,184,230,.2));
+}
+.personal-illustrations .hero-fish {
+  width: clamp(70px, 16vw, 120px);
+  max-height: 130px;
+}
+.personal-illustrations .hero-butterfly {
+  width: clamp(90px, 19vw, 150px);
+  max-height: 110px;
+  animation: butterfly-drift 5s ease-in-out infinite;
+}
+@keyframes butterfly-drift {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-6px) rotate(2deg); }
+}
+@media (max-width: 600px) {
+  .masthead { padding-top: 175px; }
+  .masthead::before { height: 220px; background-position: center 42%; }
+  .personal-illustrations { min-height: 82px; gap: 12px; }
+}
+/* Le cadre fourni sert de référence pour des ornements fins, non doublés. */
+.ornate-panel, .horoscope-panel, .moon-panel, .tarot-panel {
+  outline: none;
+}
