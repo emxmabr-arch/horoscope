@@ -181,8 +181,40 @@ function dayOfYear(date) {
   return Math.floor((date - start) / 86400000);
 }
 
+// Profil astrologique utilisé pour personnaliser le rituel du Grimoire.
+// Seuls les signes sont conservés ici : aucune date ou heure de naissance.
+const NATAL_PROFILE = {
+  sun: "Poissons",
+  ascendant: "Cancer",
+  descendant: "Capricorne",
+  moon: "Scorpion"
+};
+
 function getDailyTarot(date) {
-  return tarotCards[dayOfYear(date) % tarotCards.length];
+  // Le profil sert de graine : le résultat est stable pour un même jour,
+  // mais diffère du tirage générique partagé par tous les visiteurs.
+  const dateKey = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  const profileKey = `${NATAL_PROFILE.sun}-${NATAL_PROFILE.ascendant}-${NATAL_PROFILE.descendant}-${NATAL_PROFILE.moon}`;
+  const seed = `${dateKey}|${profileKey}|grimoire-astral`;
+  let hash = 0;
+
+  for (let i = 0; i < seed.length; i += 1) {
+    hash = (hash * 31 + seed.charCodeAt(i)) >>> 0;
+  }
+
+  return tarotCards[hash % tarotCards.length];
+}
+
+function getPersonalTarotReflection(card) {
+  const reflections = [
+    "Avec ton Soleil en Poissons et ta Lune en Scorpion, laisse cette carte ouvrir un espace à ton intuition, tout en prenant le temps de distinguer tes ressentis de tes certitudes.",
+    "Ton ascendant Cancer invite à accueillir ce que cette carte réveille en toi avec douceur ; ton descendant Capricorne rappelle qu'un petit geste concret peut donner une forme à cette prise de conscience.",
+    "Entre la sensibilité des Poissons et l'intensité du Scorpion, cette carte peut devenir un miroir de ce qui cherche à évoluer. Tu peux avancer à ton rythme, sans devoir tout comprendre aujourd'hui.",
+    "Ton axe Cancer–Capricorne évoque l'équilibre entre protection et engagement. Demande-toi comment préserver ton espace intérieur tout en donnant une place réelle à ce qui compte pour toi."
+  ];
+
+  const index = tarotCards.indexOf(card) % reflections.length;
+  return reflections[index];
 }
 
 function renderTarot(date) {
@@ -191,7 +223,10 @@ function renderTarot(date) {
   setText("tarot-number", card.number);
   setText("tarot-name", card.name);
   setText("tarot-keywords", card.keywords);
-  setText("tarot-message", card.message);
+  setText(
+    "tarot-message",
+    `${getPersonalTarotReflection(card)} ${card.message}`
+  );
   setText("tarot-reading-title", card.title);
 }
 
