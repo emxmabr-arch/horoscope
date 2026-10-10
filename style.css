@@ -2058,8 +2058,3 @@ body .closing-note,
 .tarot-illustration-frame {
   border-radius: 0 !important;
 }
-/* Les cartes « Courants vivants » et l'encadrement signature du site gardent leurs arrondis. */
-.life-card,
-.masthead {
-  border-radius: revert !important;
-}
