@@ -2069,3 +2069,9 @@ body .closing-note,
   width: min(100%, 88px);
   justify-self: center;
 }
+
+
+/* Espace entre le cadre de l'horoscope et son bouton d'actualisation. */
+.horoscope-refresh-wrap {
+  margin-top: 18px;
+}
