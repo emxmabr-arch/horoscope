@@ -647,10 +647,26 @@ function saveDailyTarot(card) {
   }
 }
 
+function updateDailyTarotControls(isDrawn) {
+  const shuffleButton = document.getElementById("shuffle-tarot");
+  const newButton = document.getElementById("new-tarot");
+  if (shuffleButton) {
+    shuffleButton.disabled = isDrawn;
+    if (isDrawn) shuffleButton.textContent = "✧ Tirage du jour révélé";
+    else shuffleButton.textContent = "⤨ Mélanger les cartes";
+  }
+  if (newButton) {
+    newButton.disabled = isDrawn;
+    if (isDrawn) newButton.textContent = "↻ Reviens demain pour un nouvel arcane";
+    else newButton.textContent = "↻ Tirer une autre carte";
+  }
+}
+
 function showSavedDailyTarot(card) {
   shuffledTarot = shuffleArray(tarotCards);
   selectedTarotIndex = shuffledTarot.findIndex(item => item.name === card.name);
   tarotHasBeenDrawn = true;
+  updateDailyTarotControls(true);
 
   setText("tarot-number", card.number);
   setText("tarot-name", card.name);
@@ -693,6 +709,7 @@ function revealTarotCard(index) {
   tarotHasBeenDrawn = true;
   selectedTarotIndex = index;
   saveDailyTarot(card);
+  updateDailyTarotControls(true);
 
   setText("tarot-number", card.number);
   setText("tarot-name", card.name);
@@ -721,6 +738,7 @@ function initInteractiveTarot() {
   const newButton = document.getElementById("new-tarot");
   if (shuffleButton) shuffleButton.addEventListener("click", shuffleTarotDeck);
   if (newButton) newButton.addEventListener("click", shuffleTarotDeck);
+  updateDailyTarotControls(false);
 
   const savedCard = readSavedDailyTarot();
   if (savedCard) {
