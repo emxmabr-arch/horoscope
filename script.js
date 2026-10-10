@@ -222,6 +222,7 @@ function renderTarot(date) {
 
   setText("tarot-number", card.number);
   setText("tarot-name", card.name);
+  setTarotIllustration(card);
   setText("tarot-keywords", card.keywords);
   setText(
     "tarot-message",
@@ -531,6 +532,44 @@ const tarotQuestions = {
   "Le Jugement": "Quel appel intérieur revient et demande ton attention ?",
   "Le Monde": "Quel chemin parcouru peux-tu reconnaître et célébrer ?"
 };
+
+
+// Illustrations Rider–Waite–Smith (jeu original de 1909, domaine public).
+// L'ordre Strength/Justice du jeu anglais diffère du tarot de Marseille :
+const tarotImageNumbers = {
+  "Le Mat": 0,
+  "Le Bateleur": 1,
+  "La Papesse": 2,
+  "L'Impératrice": 3,
+  "L'Empereur": 4,
+  "Le Pape": 5,
+  "L'Amoureux": 6,
+  "Le Chariot": 7,
+  "La Justice": 11,
+  "L'Hermite": 9,
+  "La Roue de Fortune": 10,
+  "La Force": 8,
+  "Le Pendu": 12,
+  "L'Arcane sans nom": 13,
+  "Tempérance": 14,
+  "Le Diable": 15,
+  "La Maison Dieu": 16,
+  "L'Étoile": 17,
+  "La Lune": 18,
+  "Le Soleil": 19,
+  "Le Jugement": 20,
+  "Le Monde": 21
+};
+
+function setTarotIllustration(card) {
+  const image = document.getElementById("tarot-art-image");
+  if (!image) return;
+  const imageNumber = tarotImageNumbers[card.name];
+  if (imageNumber === undefined) return;
+  image.src = `https://ishtarcollective.blob.core.windows.net/rider-waite-tarot/major-${imageNumber}.jpg`;
+  image.alt = `${card.name}, illustration du tarot Rider–Waite–Smith`;
+  image.title = `${card.name} — illustration originale Rider–Waite–Smith`;
+}
 
 function shuffleArray(items) {
   const array = [...items];
