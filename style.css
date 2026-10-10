@@ -1733,7 +1733,6 @@ h1, h2, h3, h4,
 
 
 /* Nouvelle typographie de lecture : Voltaire pour les textes, en gardant les titres à part */
-@import url('https://fonts.googleapis.com/css2?family=Voltaire&display=swap');
 body,
 body p,
 body li,
@@ -1930,4 +1929,53 @@ h1 em, h2 em, h3 em, h4 em,
 .moon-orbit::after {
   content: none !important;
   display: none !important;
+}
+
+
+/* Voltaire est désormais hébergée localement dans le dossier assets. */
+@font-face {
+  font-family: 'Voltaire Local';
+  src: url('assets/voltaire.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* Typographie Voltaire pour les textes courants et l'intertitre du tarot. */
+body,
+body p,
+body li,
+body a,
+body button,
+body input,
+body textarea,
+body select,
+body label,
+body small,
+body blockquote,
+body .subtitle,
+body .date-line,
+body .source-line,
+body .site-nav,
+body .eyebrow,
+body .horoscope-text,
+body .status-line,
+body .card-label,
+body .panel-topline,
+body .moon-copy,
+body .tarot-hint,
+body .tarot-question,
+body .tarot-description,
+body .tarot-reading,
+body .closing-note,
+#tarot-result .tarot-reading h4 {
+  font-family: 'Voltaire Local', sans-serif !important;
+}
+
+/* CS Amber reste réservée aux grands titres décoratifs, pas aux intertitres du tarot. */
+#tarot-result .tarot-reading h4,
+#tarot-result .tarot-reading h4 * {
+  font-family: 'Voltaire Local', sans-serif !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
 }
