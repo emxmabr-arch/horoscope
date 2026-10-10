@@ -181,57 +181,66 @@
         <div class="section-heading">
           <span class="heading-symbol">✧</span>
           <div>
-            <p class="eyebrow">UNE CARTE, UN MIROIR</p>
-            <h2>Le tarot du jour</h2>
+            <p class="eyebrow">UN RITUEL POUR TOI</p>
+            <h2>Le tarot des 22 arcanes</h2>
           </div>
           <span class="heading-symbol">✧</span>
         </div>
 
         <p class="section-intro">
-          Une image symbolique pour accompagner ta réflexion.
+          Respire, pose intérieurement ton intention, puis choisis la carte qui t'appelle.
         </p>
 
-        <div class="tarot-layout">
-          <div class="tarot-card-wrap">
-            <article class="tarot-card" aria-label="Carte de tarot du jour">
-              <div class="tarot-inner-frame">
-                <p class="tarot-number" id="tarot-number">XVII</p>
-
-                <div class="tarot-art" aria-hidden="true">
-                  <div class="tarot-sun"></div>
-                  <div class="tarot-moon">☾</div>
-                  <div class="tarot-butterfly butterfly-one">❧</div>
-                  <div class="tarot-butterfly butterfly-two">✧</div>
-                  <div class="tarot-water"></div>
-                  <div class="tarot-star star-a">✦</div>
-                  <div class="tarot-star star-b">✧</div>
-                  <div class="tarot-star star-c">·</div>
-                </div>
-
-                <h3 id="tarot-name">L'Étoile</h3>
-                <p class="tarot-caption">ARCANE DU JOUR</p>
-              </div>
-            </article>
+        <div class="tarot-ritual ornate-panel">
+          <div class="tarot-ritual-heading">
+            <span aria-hidden="true">☾</span>
+            <p id="tarot-status" aria-live="polite">Les 22 arcanes attendent ton choix…</p>
+            <span aria-hidden="true">✧</span>
           </div>
+          <div class="tarot-deck" id="tarot-deck" aria-label="Choisis une carte parmi les 22 arcanes majeurs"></div>
+          <div class="tarot-actions">
+            <button class="tarot-action-button" id="shuffle-tarot" type="button">⤨ Mélanger les cartes</button>
+            <p class="tarot-hint" id="tarot-hint">Clique sur une carte face cachée pour découvrir ton arcane.</p>
+          </div>
+        </div>
 
+        <div class="tarot-result" id="tarot-result" hidden>
+          <div class="tarot-result-card">
+            <div class="tarot-card-wrap">
+              <article class="tarot-card revealed" aria-label="Arcane révélé">
+                <div class="tarot-inner-frame">
+                  <p class="tarot-number" id="tarot-number">XVII</p>
+                  <div class="tarot-art" aria-hidden="true">
+                    <div class="tarot-sun"></div>
+                    <div class="tarot-moon">☾</div>
+                    <div class="tarot-butterfly butterfly-one">❧</div>
+                    <div class="tarot-butterfly butterfly-two">✧</div>
+                    <div class="tarot-water"></div>
+                    <div class="tarot-star star-a">✦</div>
+                    <div class="tarot-star star-b">✧</div>
+                    <div class="tarot-star star-c">·</div>
+                  </div>
+                  <h3 id="tarot-name">L'Étoile</h3>
+                  <p class="tarot-caption">TON ARCANE</p>
+                </div>
+              </article>
+            </div>
+          </div>
           <div class="tarot-reading">
-            <p class="eyebrow">TON TIRAGE SYMBOLIQUE</p>
+            <p class="eyebrow">TON MIROIR ASTRAL</p>
             <h3 id="tarot-reading-title">Une invitation à rêver</h3>
-
-            <p class="tarot-keywords" id="tarot-keywords">
-              Espoir · Intuition · Renouveau
-            </p>
-
+            <p class="tarot-keywords" id="tarot-keywords"></p>
             <div class="reading-divider">✧ ─── ❧ ─── ✧</div>
-
-            <p id="tarot-message">
-              Laisse une place à ce qui cherche doucement à éclore.
-            </p>
-
-            <p class="tarot-disclaimer">
-              Le tarot est ici un support créatif et introspectif,
-              non une prédiction certaine.
-            </p>
+            <h4>La symbolique de la carte</h4>
+            <p id="tarot-message"></p>
+            <h4>Ton éclairage personnel</h4>
+            <p id="tarot-personal"></p>
+            <h4>Une question à emporter</h4>
+            <p id="tarot-question" class="tarot-question"></p>
+            <p class="tarot-disclaimer">Le tarot est un support symbolique et introspectif, non une prédiction certaine. Garde ce qui résonne en toi et laisse le reste.</p>
+          </div>
+          <div class="tarot-reset-wrap">
+            <button class="tarot-action-button" id="new-tarot" type="button">↻ Tirer une autre carte</button>
           </div>
         </div>
       </section>
@@ -251,6 +260,6 @@
     </footer>
   </div>
 
-  <script src="script.js?v=20261010-tarot1"></script>
+  <script src="script.js?v=20261010-interactive-tarot1"></script>
 </body>
 </html>
