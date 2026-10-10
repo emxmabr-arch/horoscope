@@ -628,12 +628,21 @@ function renderTarotDeck() {
   const deck = document.getElementById("tarot-deck");
   if (!deck) return;
   deck.replaceChildren();
-  const visibleCards = tarotDeckExpanded ? shuffledTarot.length : Math.min(1, shuffledTarot.length);
-  shuffledTarot.forEach((card, index) => {
-    if (index >= visibleCards) return;
-    if (tarotHasBeenDrawn && index === selectedTarotIndex) return;
-    deck.appendChild(createTarotBack(index));
-  });
+  if (tarotHasBeenDrawn) {
+    // Après le tirage, on replie le jeu et on ne laisse qu'une carte décorative.
+    if (shuffledTarot.length) {
+      const back = createTarotBack(selectedTarotIndex >= 0 ? selectedTarotIndex : 0);
+      back.disabled = true;
+      back.setAttribute("aria-label", "Mon tirage du jour est révélé");
+      deck.appendChild(back);
+    }
+  } else {
+    const visibleCards = tarotDeckExpanded ? shuffledTarot.length : Math.min(1, shuffledTarot.length);
+    shuffledTarot.forEach((card, index) => {
+      if (index >= visibleCards) return;
+      deck.appendChild(createTarotBack(index));
+    });
+  }
   deck.classList.remove("deck-shuffling");
   void deck.offsetWidth;
 }
@@ -685,9 +694,9 @@ function updateDailyTarotControls(isDrawn) {
     else shuffleButton.textContent = "⤨ Mélanger les cartes";
   }
   if (newButton) {
-    newButton.disabled = isDrawn;
-    if (isDrawn) newButton.textContent = "↻ Reviens demain pour un nouvel arcane";
-    else newButton.textContent = "↻ Tirer une autre carte";
+    newButton.disabled = false;
+    if (isDrawn) newButton.textContent = "↻ Réinitialiser le tirage";
+    else newButton.textContent = "↻ Réinitialiser le tirage";
   }
 }
 
@@ -738,6 +747,7 @@ function revealTarotCard(index) {
   if (!card) return;
   tarotHasBeenDrawn = true;
   selectedTarotIndex = index;
+  tarotDeckExpanded = false;
   saveDailyTarot(card);
   updateDailyTarotControls(true);
 
@@ -763,11 +773,29 @@ function revealTarotCard(index) {
   if (result) result.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
+function resetTarotReading() {
+  tarotHasBeenDrawn = false;
+  selectedTarotIndex = -1;
+  tarotDeckExpanded = false;
+  shuffledTarot = shuffleArray(tarotCards);
+  try {
+    window.localStorage.removeItem(DAILY_TAROT_STORAGE_KEY);
+  } catch (error) {
+    console.warn("Le tirage ne peut pas être réinitialisé dans le stockage :", error);
+  }
+  const result = document.getElementById("tarot-result");
+  if (result) result.hidden = true;
+  updateDailyTarotControls(false);
+  renderTarotDeck();
+  setText("tarot-status", "Une carte attend que je la découvre…");
+  setText("tarot-hint", "Je mélange les cartes pour révéler les 22 arcanes.");
+}
+
 function initInteractiveTarot() {
   const shuffleButton = document.getElementById("shuffle-tarot");
   const newButton = document.getElementById("new-tarot");
   if (shuffleButton) shuffleButton.addEventListener("click", shuffleTarotDeck);
-  if (newButton) newButton.addEventListener("click", shuffleTarotDeck);
+  if (newButton) newButton.addEventListener("click", resetTarotReading);
   updateDailyTarotControls(false);
 
   const savedCard = readSavedDailyTarot();
