@@ -1757,3 +1757,59 @@ body .status-line {
   font-style: normal !important;
   color: #fff !important;
 }
+
+
+/* Harmonisation : Voltaire pour tous les textes hors titres */
+body,
+body p,
+body li,
+body a,
+body button,
+body input,
+body textarea,
+body select,
+body label,
+body small,
+body blockquote,
+body .subtitle,
+body .date-line,
+body .source-line,
+body .site-nav,
+body .eyebrow,
+body .horoscope-text,
+body .status-line,
+body .card-label,
+body .panel-topline,
+body .moon-copy,
+body .tarot-hint,
+body .tarot-question,
+body .tarot-description,
+body .tarot-reading,
+body .closing-note {
+  font-family: 'Voltaire', sans-serif;
+}
+
+/* Supprimer les italiques résiduels dans les textes ; les titres restent indépendants */
+body p,
+body li,
+body a,
+body button,
+body label,
+body .subtitle,
+body .date-line,
+body .source-line,
+body .horoscope-text,
+body .status-line,
+body .tarot-hint,
+body .tarot-question,
+body .tarot-description,
+body .closing-note {
+  font-style: normal !important;
+}
+
+/* Le titre principal garde son style droit, blanc */
+.masthead h1,
+.masthead h1 em {
+  font-style: normal !important;
+  color: #fff !important;
+}
