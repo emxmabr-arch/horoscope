@@ -430,8 +430,7 @@ async function loadHoroscope() {
     const data = item.data ?? {};
 
     if (status) {
-      status.textContent =
-        item.title || item.headline || editorial.title || "Les murmures du jour";
+      status.textContent = "HOROSCOPE DU JOUR";
     }
 
     // L'API Sigastra expose désormais le texte directement dans item.text.
