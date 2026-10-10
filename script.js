@@ -687,16 +687,10 @@ function saveDailyTarot(card) {
 
 function updateDailyTarotControls(isDrawn) {
   const shuffleButton = document.getElementById("shuffle-tarot");
-  const newButton = document.getElementById("new-tarot");
   if (shuffleButton) {
     shuffleButton.disabled = isDrawn;
     if (isDrawn) shuffleButton.textContent = "✧ Tirage du jour révélé";
     else shuffleButton.textContent = "⤨ Mélanger les cartes";
-  }
-  if (newButton) {
-    newButton.disabled = false;
-    if (isDrawn) newButton.textContent = "↻ Réinitialiser le tirage";
-    else newButton.textContent = "↻ Réinitialiser le tirage";
   }
 }
 
@@ -773,29 +767,9 @@ function revealTarotCard(index) {
   if (result) result.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-function resetTarotReading() {
-  tarotHasBeenDrawn = false;
-  selectedTarotIndex = -1;
-  tarotDeckExpanded = false;
-  shuffledTarot = shuffleArray(tarotCards);
-  try {
-    window.localStorage.removeItem(DAILY_TAROT_STORAGE_KEY);
-  } catch (error) {
-    console.warn("Le tirage ne peut pas être réinitialisé dans le stockage :", error);
-  }
-  const result = document.getElementById("tarot-result");
-  if (result) result.hidden = true;
-  updateDailyTarotControls(false);
-  renderTarotDeck();
-  setText("tarot-status", "Une carte attend que je la découvre…");
-  setText("tarot-hint", "Je mélange les cartes pour révéler les 22 arcanes.");
-}
-
 function initInteractiveTarot() {
   const shuffleButton = document.getElementById("shuffle-tarot");
-  const newButton = document.getElementById("new-tarot");
   if (shuffleButton) shuffleButton.addEventListener("click", shuffleTarotDeck);
-  if (newButton) newButton.addEventListener("click", resetTarotReading);
   updateDailyTarotControls(false);
 
   const savedCard = readSavedDailyTarot();
@@ -818,6 +792,8 @@ function initGrimoire() {
   setText("date", formatDate(today));
   renderMoon(today);
   initInteractiveTarot();
+  const refreshButton = document.getElementById("refresh-horoscope");
+  if (refreshButton) refreshButton.addEventListener("click", loadHoroscope);
   loadHoroscope();
 }
 
