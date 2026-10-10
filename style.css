@@ -1991,3 +1991,13 @@ body .closing-note,
 .horoscope-section + .section-block {
   margin-top: 34px !important;
 }
+
+
+/* Espacement renforcé entre le premier cadre horoscope et l'en-tête suivant. */
+#horoscope-section {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+#horoscope-section + .section-block {
+  margin-top: 64px !important;
+}
