@@ -1444,3 +1444,87 @@ body::before { opacity: .08; }
 .ornate-panel, .horoscope-panel, .moon-panel, .tarot-panel {
   outline: none;
 }
+
+
+/* Harmonisation des cadres : même voile violet que le rituel du tarot */
+.ornate-panel,
+.life-card,
+.moon-panel,
+.tarot-reading,
+.closing-note {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(143,121,183,.18), transparent 68%),
+    linear-gradient(145deg, rgba(48,32,68,.78), rgba(25,22,46,.88)) !important;
+}
+.life-card::before { background: transparent; }
+.moon-orbit { background: rgba(143,121,183,.12); }
+
+/* Le bandeau est centré et s'étire sur toute la largeur de l'en-tête */
+.masthead::before {
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  height: 270px !important;
+  background-size: cover !important;
+  background-position: center center !important;
+}
+@media (max-width: 600px) {
+  .masthead::before {
+    height: 220px !important;
+    background-position: center center !important;
+  }
+}
+
+/* Le poisson reste seul sous le titre ; le papillon devient un petit motif décoratif */
+.personal-illustrations .hero-butterfly { display: none !important; }
+.personal-illustrations { justify-content: center; }
+.personal-illustrations .hero-fish {
+  width: clamp(85px, 18vw, 135px);
+  max-height: 130px;
+}
+
+/* Remplacer les feuilles décoratives par l'illustration du papillon */
+.section-heading::after,
+.life-card::after,
+.tarot-reading::before,
+.tarot-reading::after {
+  content: "" !important;
+  width: 25px;
+  height: 25px;
+  background: url("assets/illustrations/papillon.png.png") center / contain no-repeat;
+  border: 0;
+}
+.section-heading::after {
+  top: calc(100% + 5px);
+  width: 22px;
+  height: 22px;
+  opacity: .9;
+}
+.life-card::after {
+  top: 8px;
+  width: 26px;
+  height: 26px;
+  transform: translateX(-50%) rotate(0deg);
+  opacity: .82;
+}
+.tarot-reading::before,
+.tarot-reading::after {
+  width: 28px;
+  height: 28px;
+}
+.panel-corner {
+  font-size: 0 !important;
+  width: 26px;
+  height: 26px;
+  background: url("assets/illustrations/papillon.png.png") center / contain no-repeat;
+}
+.panel-corner.corner-tr { transform: scaleX(-1); }
+.panel-corner.corner-bl { transform: scaleY(-1); }
+.panel-corner.corner-br { transform: scale(-1); }
+.panel-bottom-ornament,
+.moon-divider,
+.reading-divider {
+  font-size: 0 !important;
+  min-height: 25px;
+  background: url("assets/illustrations/papillon.png.png") center / 28px 28px no-repeat;
+}
