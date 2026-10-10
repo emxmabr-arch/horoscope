@@ -2058,3 +2058,14 @@ body .closing-note,
 .tarot-illustration-frame {
   border-radius: 0 !important;
 }
+
+
+/* Centrer la carte unique restante après le tirage. */
+#tarot-deck {
+  justify-items: center;
+}
+#tarot-deck .tarot-back {
+  grid-column: 1 / -1;
+  width: min(100%, 88px);
+  justify-self: center;
+}
