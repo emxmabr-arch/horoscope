@@ -636,6 +636,7 @@ function revealTarotCard(index) {
 
   setText("tarot-number", card.number);
   setText("tarot-name", card.name);
+  setTarotIllustration(card);
   setText("tarot-keywords", card.keywords);
   setText("tarot-reading-title", card.title);
   setText("tarot-message", card.message);
