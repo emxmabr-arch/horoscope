@@ -503,12 +503,133 @@ async function loadHoroscope() {
   }
 }
 
+
+let shuffledTarot = [];
+let tarotHasBeenDrawn = false;
+
+const tarotQuestions = {
+  "Le Mat": "Quel premier pas pourrais-tu faire sans attendre de connaître toute la suite ?",
+  "Le Bateleur": "Quelle ressource as-tu déjà entre les mains pour commencer ?",
+  "La Papesse": "Qu'entends-tu lorsque tu fais assez de silence pour t'écouter ?",
+  "L'Impératrice": "Quelle idée mériterait davantage d'espace pour grandir ?",
+  "L'Empereur": "Quelle limite ou structure pourrait protéger ce qui compte pour toi ?",
+  "Le Pape": "Quelle valeur veux-tu garder au centre de tes choix ?",
+  "L'Amoureux": "Quel choix serait le plus fidèle à tes envies profondes ?",
+  "Le Chariot": "Vers quoi souhaites-tu diriger ton énergie aujourd'hui ?",
+  "La Justice": "Que vois-tu plus clairement lorsque tu sépares les faits de tes peurs ?",
+  "L'Hermite": "Quelle réponse pourrait émerger si tu t'accordais un peu de recul ?",
+  "La Roue de Fortune": "Quel changement peux-tu accueillir sans chercher à tout contrôler ?",
+  "La Force": "À quoi ressemblerait le courage si tu le pratiquais avec douceur ?",
+  "Le Pendu": "Que pourrais-tu découvrir en regardant la situation autrement ?",
+  "L'Arcane sans nom": "Qu'es-tu prête à laisser derrière toi pour faire de la place ?",
+  "Tempérance": "Quel petit ajustement t'aiderait à retrouver ton propre rythme ?",
+  "Le Diable": "Quel désir ou attachement aimerais-tu regarder avec plus de lucidité ?",
+  "La Maison Dieu": "Quelle certitude pourrais-tu réexaminer sans te juger ?",
+  "L'Étoile": "Qu'est-ce qui te redonne de l'espoir, même discrètement ?",
+  "La Lune": "Quel ressenti mérite d'être écouté sans être pris immédiatement pour une certitude ?",
+  "Le Soleil": "Quelle joie simple pourrais-tu laisser pleinement entrer aujourd'hui ?",
+  "Le Jugement": "Quel appel intérieur revient et demande ton attention ?",
+  "Le Monde": "Quel chemin parcouru peux-tu reconnaître et célébrer ?"
+};
+
+function shuffleArray(items) {
+  const array = [...items];
+  for (let i = array.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+function createTarotBack(index) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "tarot-back";
+  button.setAttribute("aria-label", `Choisir la carte cachée ${index + 1}`);
+  button.innerHTML = `
+    <span class="tarot-back-frame" aria-hidden="true">
+      <span class="tarot-back-number">✧</span>
+      <span class="tarot-back-moon">☾</span>
+      <span class="tarot-back-star">✦</span>
+      <span class="tarot-back-flourish">❧</span>
+      <span class="tarot-back-bottom">✧</span>
+    </span>`;
+  button.addEventListener("click", () => revealTarotCard(index));
+  return button;
+}
+
+function renderTarotDeck() {
+  const deck = document.getElementById("tarot-deck");
+  if (!deck) return;
+  deck.replaceChildren();
+  shuffledTarot.forEach((card, index) => {
+    if (tarotHasBeenDrawn && index === selectedTarotIndex) return;
+    deck.appendChild(createTarotBack(index));
+  });
+  deck.classList.remove("deck-shuffling");
+  void deck.offsetWidth;
+}
+
+let selectedTarotIndex = -1;
+
+function shuffleTarotDeck() {
+  shuffledTarot = shuffleArray(tarotCards);
+  tarotHasBeenDrawn = false;
+  selectedTarotIndex = -1;
+  const result = document.getElementById("tarot-result");
+  if (result) result.hidden = true;
+  const deck = document.getElementById("tarot-deck");
+  if (deck) deck.classList.add("deck-shuffling");
+  setText("tarot-status", "Les arcanes se mêlent et changent de place…");
+  setText("tarot-hint", "Prends ton temps, puis choisis la carte qui t'attire.");
+  window.setTimeout(() => {
+    renderTarotDeck();
+    setText("tarot-status", "Les 22 arcanes attendent ton choix…");
+  }, 450);
+}
+
+function revealTarotCard(index) {
+  if (tarotHasBeenDrawn) return;
+  const card = shuffledTarot[index];
+  if (!card) return;
+  tarotHasBeenDrawn = true;
+  selectedTarotIndex = index;
+
+  setText("tarot-number", card.number);
+  setText("tarot-name", card.name);
+  setText("tarot-keywords", card.keywords);
+  setText("tarot-reading-title", card.title);
+  setText("tarot-message", card.message);
+  setText("tarot-personal", getPersonalTarotReflection(card));
+  setText("tarot-question", tarotQuestions[card.name] || "Qu'est-ce que cette carte vient éveiller en toi aujourd'hui ?");
+
+  const result = document.getElementById("tarot-result");
+  if (result) {
+    result.hidden = false;
+    result.classList.remove("tarot-result-reveal");
+    void result.offsetWidth;
+    result.classList.add("tarot-result-reveal");
+  }
+  setText("tarot-status", `Ton arcane est révélé : ${card.name}.`);
+  setText("tarot-hint", "Lis le message à ton rythme, puis garde ce qui résonne en toi.");
+  renderTarotDeck();
+  if (result) result.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function initInteractiveTarot() {
+  const shuffleButton = document.getElementById("shuffle-tarot");
+  const newButton = document.getElementById("new-tarot");
+  if (shuffleButton) shuffleButton.addEventListener("click", shuffleTarotDeck);
+  if (newButton) newButton.addEventListener("click", shuffleTarotDeck);
+  shuffleTarotDeck();
+}
+
 function initGrimoire() {
   const today = new Date();
 
   setText("date", formatDate(today));
   renderMoon(today);
-  renderTarot(today);
+  initInteractiveTarot();
   loadHoroscope();
 }
 
