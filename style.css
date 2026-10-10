@@ -1320,3 +1320,20 @@ body::before {
 .tarot-card.revealed {
   background: #2c2530;
 }
+
+
+/* Correction finale : angles droits sur toutes les parties de la carte révélée */
+.tarot-card,
+.tarot-inner-frame,
+.tarot-art,
+.tarot-card.revealed,
+.tarot-inner-frame:has(.tarot-art-image),
+.tarot-art-image {
+  border-radius: 0 !important;
+}
+.tarot-card,
+.tarot-inner-frame,
+.tarot-art {
+  overflow: hidden;
+}
+.tarot-art-image { display: block; }
