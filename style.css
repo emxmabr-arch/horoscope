@@ -1908,3 +1908,19 @@ h1 em, h2 em, h3 em, h4 em,
   display: none !important;
   visibility: hidden !important;
 }
+
+
+/* Fix définitif : Voltaire chargé explicitement et appliqué au titre du tarot */
+#tarot-result .tarot-reading h4,
+#tarot-result .tarot-reading h4 * {
+  font-family: 'Voltaire', sans-serif !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+}
+/* Aucun symbole étoilé dans le cercle lunaire */
+.moon-orbit > .orbit-dot {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
