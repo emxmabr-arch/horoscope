@@ -561,12 +561,37 @@ const tarotImageNumbers = {
   "Le Monde": 21
 };
 
+const tarotImageFiles = {
+  0: "00_Fool.jpg",
+  1: "01_Magician.jpg",
+  2: "02_High_Priestess.jpg",
+  3: "03_Empress.jpg",
+  4: "04_Emperor.jpg",
+  5: "05_Hierophant.jpg",
+  6: "06_Lovers.jpg",
+  7: "07_Chariot.jpg",
+  8: "08_Strength.jpg",
+  9: "09_Hermit.jpg",
+  10: "10_Wheel_of_Fortune.jpg",
+  11: "11_Justice.jpg",
+  12: "12_Hanged_Man.jpg",
+  13: "13_Death.jpg",
+  14: "14_Temperance.jpg",
+  15: "15_Devil.jpg",
+  16: "16_Tower.jpg",
+  17: "17_Star.jpg",
+  18: "18_Moon.jpg",
+  19: "19_Sun.jpg",
+  20: "20_Judgement.jpg",
+  21: "21_World.jpg"
+};
+
 function setTarotIllustration(card) {
   const image = document.getElementById("tarot-art-image");
   if (!image) return;
   const imageNumber = tarotImageNumbers[card.name];
   if (imageNumber === undefined) return;
-  image.src = `https://ishtarcollective.blob.core.windows.net/rider-waite-tarot/major-${imageNumber}.jpg`;
+  image.src = `assets/tarot/${tarotImageFiles[imageNumber]}`;
   image.alt = `${card.name}, illustration du tarot Rider–Waite–Smith`;
   image.title = `${card.name} — illustration originale Rider–Waite–Smith`;
 }
