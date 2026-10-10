@@ -2037,3 +2037,29 @@ body .closing-note,
 .tarot-back-frame > span {
   display: none !important;
 }
+
+
+/* Cadres droits sur le site, en conservant les silhouettes des Courants vivants et du masthead. */
+.ornate-panel,
+.moon-panel,
+.tarot-card,
+.tarot-back-frame,
+.tarot-result,
+.tarot-reading,
+.horoscope-panel,
+.horoscope-card,
+.section-frame,
+.content-frame,
+.panel-frame,
+.card-frame,
+.life-section:not(.life-card),
+.zodiac-seal,
+.tarot-art-frame,
+.tarot-illustration-frame {
+  border-radius: 0 !important;
+}
+/* Les cartes « Courants vivants » et l'encadrement signature du site gardent leurs arrondis. */
+.life-card,
+.masthead {
+  border-radius: revert !important;
+}
