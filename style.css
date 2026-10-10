@@ -2001,3 +2001,22 @@ body .closing-note,
 #horoscope-section + .section-block {
   margin-top: 64px !important;
 }
+
+
+/* Espace réel sous la barre d'en-tête, avant « Mon ciel du jour ». */
+#horoscope-section {
+  padding-top: 58px !important;
+  margin-top: 0 !important;
+}
+
+/* Retirer les petites étoiles décoratives à l'intérieur des cadres. */
+.ornate-panel::before,
+.tiny-star,
+.card-star,
+.closing-star {
+  display: none !important;
+  content: none !important;
+}
+.panel-bottom-ornament {
+  font-size: 0 !important;
+}
