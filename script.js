@@ -1,7 +1,7 @@
 
 const SIGN = "pisces";
 const API_URL =
-  `https://sigastra.com/api/v1/daily?lang=fr&sign=${SIGN}&full=1`;
+  `https://api.astroway.info/v1/public/horoscope/daily?sign=${SIGN}&lang=fr`;
 
 const tarotCards = [
   {
@@ -346,10 +346,10 @@ function renderApiCredit(url) {
   if (!container) return;
 
   const link = document.createElement("a");
-  link.href = url || "https://sigastra.com/";
+  link.href = url || "https://api.astroway.info/en/docs/api/operations/publichoroscopedaily/";
   link.target = "_blank";
   link.rel = "noopener noreferrer";
-  link.textContent = "Horoscope fourni par Sigastra";
+  link.textContent = "Horoscope fourni par AstroWay";
 
   container.replaceChildren(link);
 
@@ -438,6 +438,7 @@ async function loadHoroscope() {
     // si la structure de la réponse évolue à nouveau.
     const horoscopeBody =
       item.text ??
+      item.horoscope ??
       item.body ??
       item.articleBody ??
       item.content ??
@@ -447,6 +448,8 @@ async function loadHoroscope() {
       item.sections?.general ??
       item.sections?.main ??
       item.sections ??
+      result.horoscope ??
+      result.data?.horoscope ??
       result.text ??
       result.body;
 
